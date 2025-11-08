@@ -11,6 +11,8 @@ export default defineConfig({
         target: 'http://localhost:5000',
         changeOrigin: true
       }
-    }
+    },
+    // Add this to fix 404 on refresh in dev
+    historyApiFallback: true
   }
 })

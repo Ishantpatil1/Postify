@@ -30,9 +30,30 @@ app.use(helmet({
   crossOriginResourcePolicy: { policy: "cross-origin" }
 })); // Security headers
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "https://postify-silk.vercel.app",
+      "https://postify-git-main-ishant-patils-projects.vercel.app",
+      "https://postify-dd0vvj0rn-ishant-patils-projects.vercel.app"
+    ];
+
+    // ✅ Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log("Blocked by CORS:", origin);
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
 }));
+
+
+
 app.use(morgan('dev')); // Logging
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
