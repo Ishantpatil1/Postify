@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "placeholder-complete-assignment",
+			"type": "shell",
+			"command": "Write-Output \"Placeholder: waiting for assignment details from user.\"",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}
